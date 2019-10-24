@@ -5,7 +5,7 @@ import os
 from PIL import Image
 
 slide_name = sys.argv[2] + '/' + sys.argv[1];
-output_folder = sys.argv[3] + '/' + sys.argv[1];
+output_folder = sys.argv[3] + sys.argv[1];
 patch_size_20X = 1000;
 
 fdone = '{}/extraction_done.txt'.format(output_folder);

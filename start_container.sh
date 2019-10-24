@@ -9,12 +9,10 @@ function cleanup() {
 }
 
 cleanup
-
-docker run -d  \
-    --name ${container_name}  \
-    -v `pwd`/vsi:/tmp/vsi \
-    -v `pwd`/tif:/tmp/tif \
-    -t ${public_docker_host}/${GOOGLE_PROJECT_ID}/${image_name}:${image_tag}
+#make a directory called data that has svs,output and log folders 
+docker run -d --name ${container_name} \
+-v `pwd`/data:/root/quip_classification/u24_lymphocyte/data/ \
+-t ${public_docker_host}/${GOOGLE_PROJECT_ID}/${image_name}:${image_tag}
 
 sleep 2
 docker ps
