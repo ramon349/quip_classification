@@ -26,7 +26,10 @@ try:
     elif "XResolution" in oslide.properties:
        mag = 10.0 / float(oslide.properties["XResolution"]);
     elif 'tiff.XResolution' in oslide.properties:   # for Multiplex IHC WSIs, .tiff images
-       mag = 10.0 / float(oslide.properties["tiff.XResolution"]);
+       _mpp = float(oslide.properties["tiff.XResolution"]);
+       if _mpp > 2.0:
+          _mpp = 10000.0/_mpp;
+       mag = 10.0 / _mpp;
     else:
        mag = 10.0 / float(0.254);
     pw = int(patch_size_20X * mag / 20);
