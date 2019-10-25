@@ -56,8 +56,9 @@ CAE_MODEL_PATH=${BASE_DIR}/data/models_cae
 LYM_CNN_TRAINING_DATA=${BASE_DIR}/data/training_data_cnn
 LYM_CNN_TRAINING_DEVICE=gpu0
 LYM_CNN_PRED_DEVICE=gpu0
-#LYM_NECRO_CNN_MODEL_PATH=${BASE_DIR}/data/models_cnn
-#LYM_NECRO_CNN_MODEL_PATH=${BASE_DIR}/prediction/NNFramework_TF_models/config_vgg-mix_test_ext.ini
+#LYM_NECRO_CNN_MODEL_PATH=${BASE_DIR}/data/models_cnn 
+MODEL_CONFIG_FILENAME=config_vgg-mix_test_ext.ini
+LYM_NECRO_CNN_MODEL_PATH=${BASE_DIR}/prediction/NNFramework_TF_models/config_vgg-mix_test_ext.ini
 if [[ -n $MODEL_CONFIG_FILENAME ]]; then
   LYM_NECRO_CNN_MODEL_PATH=${BASE_DIR}/prediction/NNFramework_TF_models/${MODEL_CONFIG_FILENAME} ;
 else
