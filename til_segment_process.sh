@@ -1,5 +1,5 @@
 !/bin/bash
-## image svs or tif file
+## image svs or tif file 
 echo "Received imageInput=$imageInput"
 
 
