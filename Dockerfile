@@ -9,7 +9,7 @@ RUN 	apt-get -y update && \
 
 WORKDIR /root
 
-RUN	git clone https://github.com/SBU-BMI/quip_classification && \
+RUN	git clone https://github.com/ramon349/quip_classification.git && \
 	cd /root/quip_classification/u24_lymphocyte/prediction/NNFramework_TF_models && \
 	wget -v -O models.zip -L \
 		https://stonybrookmedicine.box.com/shared/static/bl15zu4lwb9cc7ltul15aa8kyrn7kh2d.zip >/dev/null 2>&1 && \
