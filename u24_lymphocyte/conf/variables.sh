@@ -21,7 +21,7 @@ if [[ ! -n $LYM_PREDICTION_BATCH_SIZE ]]; then
    LYM_PREDICTION_BATCH_SIZE=96;
 fi
 # Base directory
-BASE_DIR=/root/quip_classification/u24_lymphocyte/
+BASE_DIR=/root/quip_classification/u24_lymphocyte
 OUT_DIR=${BASE_DIR}/data/output
 
 # The username you want to download heatmaps from
