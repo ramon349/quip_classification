@@ -1,4 +1,4 @@
-FROM	nvcr.io/nvidia/tensorflow:18.11-py3
+FROM	nvcr.io/nvidia/tensorflow/tensorflow:latest-gpu
 MAINTAINER quip_classification 
 
 ENTRYPOINT []
