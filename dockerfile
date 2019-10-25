@@ -18,6 +18,7 @@ RUN	git clone https://github.com/ramon349/quip_classification && \
 
 ENV	BASE_DIR="/root/quip_classification/u24_lymphocyte"
 ENV	PATH="./":$PATH
-WORKDIR /root/quip_classification/u24_lymphocyte/scripts
+WORKDIR /root/quip_classification/u24_lymphocyte/scripts 
+COPY til_segment_process.sh ${BASE_DIR}
 
 CMD ["/bin/bash"]
