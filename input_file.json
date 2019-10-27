@@ -1,7 +1,5 @@
 [
     {
-       "wf_quip_nuclear_segmentation.imageToBeProcessed": "gs://nuclear_seqmentation_quip_cnn_pipeline/input_images/001738-000368_1_04_20181011-multires.tif",
-       "wf_quip_nuclear_segmentation.wsi_seg.result": "multires_test_output.tar.gz",
-       "wf_quip_nuclear_segmentation.wsi_seg.CUDA_VISIBLE_DEVICES": "1"
+       "wf_quip_lymphocyte_segmentation.imageInput": "gs://nuclear_seqmentation_quip_cnn_pipeline/input_images/001738-000368_1_04_20181011-multires.tif"
     }
 ]
