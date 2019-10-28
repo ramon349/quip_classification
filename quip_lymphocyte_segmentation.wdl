@@ -2,10 +2,12 @@ task quip_lymphocyte_segmentation {
   File imageInput 
   String result ="multirest_tilSegment.tar.gz"
   command {
-      echo "$(date): Task: pyradiomics started"
-      cd /root/quip_classification
+      echo "$(date): Till Segment has begun "
+      cd /root/quip_classification 
+      echo "GET WHAT IS IN THE DIRECTORY"  
+      ls 
       chmod a+x ./til_segment_process.sh
-      time ./til_segment_process.sh -imageInput=${imageInput} -result=${result}
+      time ./til_segment_process.sh ${imageInput} ${result}
       echo "$(date): Task: pyradiomics finished"
     }
     output {
@@ -16,7 +18,7 @@ task quip_lymphocyte_segmentation {
       bootDiskSizeGb: 100
       disks: "local-disk 100 SSD"
       memory:  "64 GB"
-      cpu: "12" 
+      cpu: "8" 
       gpuCount: 1
       gpu: "nvidia-tesla-k80"
       maxRetries: 1
