@@ -2,8 +2,8 @@
 ## image svs or tif file  
 imageInput=$1 
 result=$2
-echo "Received imageInput=$imageInput"
-echo "Received result=$result"
+echo "Received imageInput=${imageInput}"
+echo "Received result=${result}"
 
 data_dir=/root/quip_classification/u24_lymphocyte/data
 svs_dir =${data_dir}/svs/
