@@ -1,4 +1,4 @@
-#!/bin/bash
+#/bin/bash
 ## image svs or tif file  
 imageInput=$1 
 result=$2
