@@ -30,7 +30,7 @@ function build_push_image() {
    local image_name=$1
    local image_tag=$2
    local docker_file=$3
-   #build_image ${image_name} ${image_tag} ${docker_file}
+   build_image ${image_name} ${image_tag} ${docker_file}
    push_image ${image_name} ${image_tag}
    docker images
 }
