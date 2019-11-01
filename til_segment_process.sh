@@ -20,7 +20,7 @@ mv $imageInput ${svs_dir}
 
 cd /root
 #Now let's CD to the tile extraction folder 
-cd /root/quip_classification/u24_lymphocyte/
+cd /root/quip_classification/u24_lymphocyte/scripts/
 bash ./patch_2_heatmap.sh
 
 tar -czf /cromwell_root/${result} ${outpu_dir}
