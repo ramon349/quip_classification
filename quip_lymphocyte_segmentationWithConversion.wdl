@@ -13,7 +13,8 @@ task vsi_detector {
     maxRetries: 1
     zones: "us-east1-b us-east1-c us-east1-d us-central1-a us-central1-b us-central1-c us-central1-f us-east4-a us-east4-b us-east4-c us-west1-a us-west1-b us-west1-c us-west2-a us-west2-b us-west2-c"
   }
-} 
+}
+
 task convert {
   File vsiInput
   String tifOutput = "multires.tif"
@@ -48,7 +49,7 @@ task quip_lymphocyte_segmentation {
       ls 
       chmod a+x ./til_segment_process.sh 
       echo "From containers perspective" 
-      time ./til_segment_process.sh ${originalInput} ${result} ${imageInput}
+      time ./til_segment_process.sh -originalInput=${originalInput} -imageInput=${imageInput} -result=${result}
       echo "$(date): Task: Til segment has finished"
     }
     output {
@@ -68,16 +69,19 @@ task quip_lymphocyte_segmentation {
     }
  }
 
+
 workflow wf_quip_lymphocyte_segmentation{ 
-  File imageToBeProcessed 
-  call vsi_detector {input: fileInput=imageToBeProcessed}
+  File imageToBeProcessed
+  String resultName
+  #Detect if input image is vsi or not 
+  call vsi_detector {input: fileInput=imageToBeProcessed} 
   Boolean should_call_convert = vsi_detector.out 
   if(should_call_convert){
     call convert {input: vsiInput=imageToBeProcessed} 
     File convert_out = convert.out
   }#do standard process  
   File? convert_out_maybe = convert_out
-  call quip_lymphocyte_segmentation {input: imageInput=convert_out_maybe,originalInput=imageToBeProcessed}
+  call quip_lymphocyte_segmentation {input: imageInput=convert_out_maybe,originalInput=imageToBeProcessed,result=resultName}
   output {
      quip_lymphocyte_segmentation.out
   }
