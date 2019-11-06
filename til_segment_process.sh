@@ -1,4 +1,34 @@
-#/bin/bash
+#/bin/bash 
+for i in "$@"
+do
+case $i in
+    -imageInput=*)
+    imageInput="${i#*=}"
+    shift # past argument=value
+    ;;
+    -originalInput=*)
+    originalInput="${i#*=}"
+    shift # past argument=value
+    ;;
+    -result=*)
+    result="${i#*=}"
+    shift # past argument=value
+    ;;
+    *)
+          # unknown option
+    ;;
+esac
+done 
+echo "Received imageInput=$imageInput"
+echo "Received originalInput=$originalInput"
+if [ -s "$imageInput" ]
+then
+     echo "imageInput=$imageInput from converter is not empty, use it"
+else
+     echo "imageInput=$imageInput from converter is empty, use originalInput=$originalInput"
+     imageInput=${originalInput}
+fi
+
 ## image svs or tif file  
 imageInput=$1 
 result=$2

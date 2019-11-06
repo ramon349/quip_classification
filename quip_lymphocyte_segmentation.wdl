@@ -11,7 +11,7 @@ task quip_lymphocyte_segmentation {
       echo "imageInput is: ${imageInput}" 
       echo "Result is: ${result}"
       time ./til_segment_process.sh ${imageInput} ${result}
-      echo "$(date): Task: pyradiomics finished"
+      echo "$(date): Task: Til segment has finished"
     }
     output {
       File out="${result}"
