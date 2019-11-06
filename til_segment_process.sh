@@ -30,8 +30,6 @@ else
 fi
 
 ## image svs or tif file  
-imageInput=$1 
-result=$2
 echo "Received imageInput=${imageInput}"
 echo "Received result=${result}"
 
