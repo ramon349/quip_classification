@@ -12,7 +12,8 @@ cleanup
 #make a directory called data that has svs,output and log folders 
 docker run -d --name ${container_name} \
 -v `pwd`/data:/root/quip_classification/u24_lymphocyte/data/ \
--t ${public_docker_host}/${GOOGLE_PROJECT_ID}/${image_name}:${image_tag}
+-v `pwd`/u24_lymphocyte/scripts:/root/quip_classification/u24_lymphocyte/scripts/ \
+-t ${public_docker_host}/${GOOGLE_PROJECT_ID}/${image_name}:${image_tag} 
 
 sleep 2
 docker ps

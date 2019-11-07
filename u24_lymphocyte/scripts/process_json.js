@@ -47,7 +47,7 @@ function convert(filename){
   }).on('close',()=>{
   	const content = generateDoc(data,filename);
     if(!fs.existsSync(outputFolder)) fs.mkdirSync(outputFolder);
-  	fs.writeFile(`${outputFolder}/NEW_${filename}`, content, function(err) {
+  	fs.writeFile(`${outputFolder}/BORB_${filename}`, content, function(err) {
       	console.log('close');
         if (err) throw err;
         remainder--;
