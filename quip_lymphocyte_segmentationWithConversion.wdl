@@ -17,11 +17,11 @@ task vsi_detector {
 
 task convert {
   File vsiInput
-  String tifOutput = "multires.tif"
+  String tifOutput
   command {
     echo "$(date): Task: convert started"
     cd /root
-    time ./converter_process.sh ${vsiInput} ${tifOutput}
+    time ./converter_process.sh ${vsiInput} "${tifOutput}.tif"
     echo "$(date): Task: convert finished"
   }
   output {
@@ -49,11 +49,11 @@ task quip_lymphocyte_segmentation {
       ls 
       chmod a+x ./til_segment_process.sh 
       echo "From containers perspective" 
-      time ./til_segment_process.sh -originalInput=${originalInput} -imageInput=${imageInput} -result=${result}
+      time ./til_segment_process.sh -originalInput=${originalInput} -imageInput=${imageInput} -result="${result}.tar.gz"
       echo "$(date): Task: Til segment has finished"
     }
     output {
-      File out="${result}"
+      File out="${result}.tar.gz"
     }
     runtime {
       docker: "us.gcr.io/cloudypipelines/til_segmentation:1.1"
@@ -77,7 +77,7 @@ workflow wf_quip_lymphocyte_segmentation{
   call vsi_detector {input: fileInput=imageToBeProcessed} 
   Boolean should_call_convert = vsi_detector.out 
   if(should_call_convert){
-    call convert {input: vsiInput=imageToBeProcessed} 
+    call convert {input: vsiInput=imageToBeProcessed,tifOutput=resultName} 
     File convert_out = convert.out
   }#do standard process  
   File? convert_out_maybe = convert_out
