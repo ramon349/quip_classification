@@ -14,6 +14,10 @@ case $i in
     result="${i#*=}"
     shift # past argument=value
     ;;
+    -BORBcompatible=*)
+    BORBcompatible="${i#*=}"
+    shift
+    ;;
     *)
           # unknown option
     ;;
@@ -27,7 +31,8 @@ then
 else
      echo "imageInput=$imageInput from converter is empty, use originalInput=$originalInput"
      imageInput=${originalInput}
-fi
+fi 
+
 
 ## image svs or tif file  
 echo "Received imageInput=${imageInput}"
@@ -50,6 +55,8 @@ cd /root
 #Now let's CD to the tile extraction folder 
 cd /root/quip_classification/u24_lymphocyte/scripts/
 bash ./svs_2_heatmap.sh
-
+if [-s "$BORBcompatible"] 
+     bash borbConv.sh
+fi 
 tar -czf /cromwell_root/${result} ${output_dir}
 ls -alt /cromwell_root/${result}

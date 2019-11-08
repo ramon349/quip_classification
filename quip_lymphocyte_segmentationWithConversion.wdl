@@ -41,7 +41,8 @@ task convert {
 task quip_lymphocyte_segmentation {
   File? imageInput  
   File originalInput
-  String result
+  String result 
+  String? BORBcompatible
   command {
       echo "$(date): Till Segment has begun "
       cd /root/quip_classification 
@@ -49,7 +50,7 @@ task quip_lymphocyte_segmentation {
       ls 
       chmod a+x ./til_segment_process.sh 
       echo "From containers perspective" 
-      time ./til_segment_process.sh -originalInput=${originalInput} -imageInput=${imageInput} -result="${result}.tar.gz"
+      time ./til_segment_process.sh -originalInput=${originalInput} -imageInput=${imageInput} -result="${result}.tar.gz -BORBcompatible=BORBcompatible"
       echo "$(date): Task: Til segment has finished"
     }
     output {
@@ -72,7 +73,8 @@ task quip_lymphocyte_segmentation {
 
 workflow wf_quip_lymphocyte_segmentation{ 
   File imageToBeProcessed
-  String resultName
+  String resultName 
+  String? BORBcompatible
   #Detect if input image is vsi or not 
   call vsi_detector {input: fileInput=imageToBeProcessed} 
   Boolean should_call_convert = vsi_detector.out 
@@ -81,7 +83,7 @@ workflow wf_quip_lymphocyte_segmentation{
     File convert_out = convert.out
   }#do standard process  
   File? convert_out_maybe = convert_out
-  call quip_lymphocyte_segmentation {input: imageInput=convert_out_maybe,originalInput=imageToBeProcessed,result=resultName}
+  call quip_lymphocyte_segmentation {input: imageInput=convert_out_maybe,originalInput=imageToBeProcessed,result=resultName,BORBcompatible=BORBcompatible}
   output {
      quip_lymphocyte_segmentation.out
   }
