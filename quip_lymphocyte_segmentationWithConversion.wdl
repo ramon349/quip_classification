@@ -25,7 +25,7 @@ task convert {
     echo "$(date): Task: convert finished"
   }
   output {
-    File out="${tifOutput}"
+    File out="${tifOutput}.tif"
   }
   runtime {
     docker: "us.gcr.io/cloudypipelines/quip_converter_to_tiff:1.1"
@@ -50,7 +50,7 @@ task quip_lymphocyte_segmentation {
       ls 
       chmod a+x ./til_segment_process.sh 
       echo "From containers perspective" 
-      time ./til_segment_process.sh -originalInput=${originalInput} -imageInput=${imageInput} -result="${result}.tar.gz -BORBcompatible=BORBcompatible"
+      time ./til_segment_process.sh -originalInput=${originalInput} -imageInput=${imageInput} -result="${result}".tar.gz -BORBcompatible=BORBcompatible
       echo "$(date): Task: Til segment has finished"
     }
     output {

@@ -31,31 +31,34 @@ then
 else
      echo "imageInput=$imageInput from converter is empty, use originalInput=$originalInput"
      imageInput=${originalInput}
-fi 
-
-
-## image svs or tif file  
-echo "Received imageInput=${imageInput}"
-echo "Received result=${result}"
-
+fi  
+#define paths 
 data_dir=/root/quip_classification/u24_lymphocyte/data
 svs_dir=${data_dir}/svs/
 output_dir=${data_dir}/output/ 
 patch_dir=${data_dir}/patches/
-
+#initialize directories 
 mkdir -p ${svs_dir}
 mkdir -p ${output_dir}
 mkdir -p ${patch_dir}
 
-echo "Copy imageInput=$imageInput to ${svs_dir}"
-mv $imageInput ${svs_dir}
+#extract  tar or zip file if necessary
+mkdir -p /tmp/data
+mv $imageInput /tmp/data/ 
+cd /tmp/data 
+tar xzvf ./*.tar.gz
+unzip ./*.zip
+#move images to svs dir 
+echo "Moving ${imageInput} contents to svs folder"
+cp *.{svs,tiff,tif} ${svs_dir}
+
 
 
 cd /root
-#Now let's CD to the tile extraction folder 
+#call heatmap extraction code  
 cd /root/quip_classification/u24_lymphocyte/scripts/
 bash ./svs_2_heatmap.sh
-if [-s "$BORBcompatible"] 
+if [-s "$BORBcompatible"]
      bash borbConv.sh
 fi 
 tar -czf /cromwell_root/${result} ${output_dir}
