@@ -59,6 +59,7 @@ cd /root
 cd /root/quip_classification/u24_lymphocyte/scripts/
 bash ./svs_2_heatmap.sh
 if [-s "$BORBcompatible"]
+then
      bash borbConv.sh
 fi 
 tar -czf /cromwell_root/${result} ${output_dir}
