@@ -33,10 +33,10 @@ else
      imageInput=${originalInput}
 fi  
 #define paths 
-data_dir=/root/quip_classification/u24_lymphocyte/data
-svs_dir=${data_dir}/svs/
-output_dir=${data_dir}/output/ 
-patch_dir=${data_dir}/patches/
+data_dir="/root/quip_classification/u24_lymphocyte/data"
+svs_dir="${data_dir}/svs/"
+output_dir="${data_dir}/output/"
+patch_dir="${data_dir}/patches/"
 #initialize directories 
 mkdir -p ${svs_dir}
 mkdir -p ${output_dir}
@@ -58,9 +58,12 @@ cd /root
 #call heatmap extraction code  
 cd /root/quip_classification/u24_lymphocyte/scripts/
 bash ./svs_2_heatmap.sh
+cd /root/quip_classification/u24_lymphocyte/scripts/
+echo "The borb commpatible flag is set to ${BORBcompatible}"
 if [-s "$BORBcompatible"]
 then
      bash borbConv.sh
-fi 
+fi  
+echo "Output dir is: ${output_dir}" 
 tar -czf /cromwell_root/${result} ${output_dir}
 ls -alt /cromwell_root/${result}
