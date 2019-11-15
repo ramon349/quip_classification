@@ -57,10 +57,12 @@ cp *.{svs,tiff,tif} ${svs_dir}
 cd /root
 #call heatmap extraction code  
 cd /root/quip_classification/u24_lymphocyte/scripts/
-bash ./svs_2_heatmap.sh
-if [-s "$BORBcompatible"]
+bash ./svs_2_heatmap.sh 
+useBorb=`echo ${BORBcompatible} | awk '{print tolower($0)}' `
+if [["$useBorb"=="true"]]
 then
      bash borbConv.sh
-fi 
-tar -czf /cromwell_root/${result} ${output_dir}
+fi  
+cd ${data_dir}
+tar -czf /cromwell_root/${result} ./output
 ls -alt /cromwell_root/${result}
