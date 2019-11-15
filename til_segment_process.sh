@@ -33,10 +33,10 @@ else
      imageInput=${originalInput}
 fi  
 #define paths 
-data_dir=/root/quip_classification/u24_lymphocyte/data
-svs_dir=${data_dir}/svs/
-output_dir=${data_dir}/output/ 
-patch_dir=${data_dir}/patches/
+data_dir="/root/quip_classification/u24_lymphocyte/data"
+svs_dir="${data_dir}/svs/"
+output_dir="${data_dir}/output/"
+patch_dir="${data_dir}/patches/"
 #initialize directories 
 mkdir -p ${svs_dir}
 mkdir -p ${output_dir}

@@ -1,7 +1,7 @@
 [
     {
-       "wf_quip_lymphocyte_segmentation.imageToBeProcessed": "gs://nuclear_seqmentation_quip_cnn_pipeline/input_images/OS-1.zip",
-       "wf_quip_lymphocyte_segmentation.resultName":"OS-1.zip_til_segment",
-       "wf_quip_lymphocyte_segmentation.BORBcompatible":"yes"
+       "wf_quip_lymphocyte_segmentation.imageToBeProcessed": "gs://nuclear_seqmentation_quip_cnn_pipeline/input_images/TCGA_TEST.svs",
+       "wf_quip_lymphocyte_segmentation.resultName":"TCGA_TEST_AT",
+       "wf_quip_lymphocyte_segmentation.BORBcompatible":"YES"
     }
 ]
