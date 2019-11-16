@@ -59,9 +59,11 @@ cd /root
 cd /root/quip_classification/u24_lymphocyte/scripts/
 bash ./svs_2_heatmap.sh 
 useBorb=`echo ${BORBcompatible} | awk '{print tolower($0)}' `
+echo "BORB VARIABLE HAS ${useBorb}"
 if [["$useBorb"=="true"]]
-then
-     bash borbConv.sh
+then 
+     echo "Starting conversion"
+     bash ./borbConv.sh
 fi  
 cd ${data_dir}
 tar -czf /cromwell_root/${result} ./output
