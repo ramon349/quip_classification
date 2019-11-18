@@ -9,7 +9,7 @@ do
     temp_path="${i}/temp"
     output_path="${i}/BORB_FILES"  
     mkdir -p "${temp_path}"
-    mkdir -p "${output_path}""
+    mkdir -p "${output_path}"
     cd "${input_path}"  
     ls 
     cp *.json "${temp_path}"
