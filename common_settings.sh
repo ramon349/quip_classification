@@ -3,7 +3,7 @@
 #################################################################
 ## Docker image/container common settings
 ##################################################################
-GOOGLE_PROJECT_ID=cloudypipelines-test
+GOOGLE_PROJECT_ID=cloudypipelines-com
 ## Notes: public: us.gcr.io   private: gcr.io
 public_docker_host=us.gcr.io
 image_name=til_segmentation

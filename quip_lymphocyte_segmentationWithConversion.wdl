@@ -7,7 +7,7 @@ task vsi_detector {
     Boolean out=read_boolean(stdout())
   }
   runtime {
-    docker: "us.gcr.io/cloudypipelines/quip_vsi_detector:1.0"
+    docker: "us.gcr.io/cloudypipelines-com/quip_vsi_detector:1.0"
     memory:  "3.75 GB"
     cpu: "1"
     maxRetries: 1
@@ -28,7 +28,7 @@ task convert {
     File out="${tifOutput}.tif"
   }
   runtime {
-    docker: "us.gcr.io/cloudypipelines/quip_converter_to_tiff:1.1"
+    docker: "us.gcr.io/cloudypipelines-com/quip_converter_to_tiff:1.1"
     bootDiskSizeGb: 50
     disks: "local-disk 50 SSD"
     memory:  "12 GB"
@@ -57,7 +57,7 @@ task quip_lymphocyte_segmentation {
       File out="${result}.tar.gz"
     }
     runtime {
-      docker: "us.gcr.io/cloudypipelines/til_segmentation:1.1"
+      docker: "us.gcr.io/cloudypipelines-com/til_segmentation:1.1"
       bootDiskSizeGb: 70
       disks: "local-disk 70 SSD"
       memory:  "52 GB"
