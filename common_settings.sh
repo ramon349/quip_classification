@@ -7,6 +7,6 @@ GOOGLE_PROJECT_ID=cloudypipelines-com
 ## Notes: public: us.gcr.io   private: gcr.io
 public_docker_host=us.gcr.io
 image_name=til_segmentation
-image_tag=1.1
+image_tag=1.3
 container_name=til_segmentation
 dockerfile=Dockerfile

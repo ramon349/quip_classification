@@ -2,9 +2,10 @@ FROM nvcr.io/nvidia/tensorflow:19.09-py3
 MAINTAINER quip_classification
 
 ENTRYPOINT []
-
-RUN 	apt-get -y update && \
-	apt-get -y install python3-pip openslide-tools wget && \ pip install openslide-python scikit-image pymongo 
+RUN apt-get install -y nodejs
+RUN apt-get -y update && \
+	apt-get -y install python3-pip openslide-tools wget && \
+	pip install openslide-python scikit-image pymongo 
 
 WORKDIR /root
 
@@ -14,8 +15,6 @@ RUN	git clone https://github.com/ramon349/quip_classification && \
 		https://stonybrookmedicine.box.com/shared/static/bl15zu4lwb9cc7ltul15aa8kyrn7kh2d.zip >/dev/null 2>&1 && \
         unzip -o models.zip && rm -f models.zip && \
 	chmod 0755 /root/quip_classification/u24_lymphocyte/scripts/* 
-RUN curl -sL https://deb.nodesource.com/setup_13.x | sudo -E bash -sudo apt-get install -y nodejs
-
 ENV	BASE_DIR="/root/quip_classification/u24_lymphocyte"
 ENV	PATH="./":$PATH
 WORKDIR /root/quip_classification/u24_lymphocyte/scripts 
