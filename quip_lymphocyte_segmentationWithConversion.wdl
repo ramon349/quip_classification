@@ -46,10 +46,7 @@ task quip_lymphocyte_segmentation {
   command {
       echo "$(date): Till Segment has begun "
       cd /root/quip_classification 
-      echo "GET WHAT IS IN THE DIRECTORY"  
-      ls 
       chmod a+x ./til_segment_process.sh 
-      echo "From containers perspective" 
       time ./til_segment_process.sh -originalInput=${originalInput} -imageInput=${imageInput} -result="${result}".tar.gz -BORBcompatible=BORBcompatible
       echo "$(date): Task: Til segment has finished"
     }
