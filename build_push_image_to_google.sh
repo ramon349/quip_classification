@@ -23,7 +23,7 @@ function push_image() {
 
    echo "Push ${image_name}:${image_tag}  to google docker container registry"
    echo "docker push ${public_docker_host}/${GOOGLE_PROJECT_ID}/${image_name}:${image_tag}"
-   #docker push ${public_docker_host}/${GOOGLE_PROJECT_ID}/${image_name}:${image_tag}
+   docker push ${public_docker_host}/${GOOGLE_PROJECT_ID}/${image_name}:${image_tag}
  }
 
 function build_push_image() {
