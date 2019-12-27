@@ -17,15 +17,19 @@ task vsi_detector {
 
 task convert {
   File vsiInput
-  String tifOutput
+  String pattern = "\\.+\\w+"
+  String replacement = ".tiff"
+  String tiffName = sub(basename(vsiInput),pattern,replacement)
   command {
     echo "$(date): Task: convert started"
+
+    echo "File name to be used ${tiffName}
     cd /root
-    time ./converter_process.sh ${vsiInput} "${tifOutput}.tif"
+    time ./converter_process.sh ${vsiInput} ${tiffName}
     echo "$(date): Task: convert finished"
   }
   output {
-    File out="${tifOutput}.tif"
+    File out=tiffName
   }
   runtime {
     docker: "us.gcr.io/cloudypipelines-com/quip_converter_to_tiff:1.1"
@@ -43,11 +47,12 @@ task quip_lymphocyte_segmentation {
   File originalInput
   String result 
   String? BORBcompatible
+  String network
   command {
       echo "$(date): Till Segment has begun "
       cd /root/quip_classification 
       chmod a+x ./til_segment_process.sh 
-      time ./til_segment_process.sh -originalInput=${originalInput} -imageInput=${imageInput} -result="${result}".tar.gz -BORBcompatible=BORBcompatible
+      time ./til_segment_process.sh -originalInput=${originalInput} -imageInput=${imageInput} -result="${result}".tar.gz -BORBcompatible=${BORBcompatible} -network=${network}
       echo "$(date): Task: Til segment has finished"
     }
     output {
@@ -72,15 +77,16 @@ workflow wf_quip_lymphocyte_segmentation{
   File imageToBeProcessed
   String resultName 
   String? BORBcompatible
+  String segmentNetwork
   #Detect if input image is vsi or not 
   call vsi_detector {input: fileInput=imageToBeProcessed} 
   Boolean should_call_convert = vsi_detector.out 
   if(should_call_convert){
-    call convert {input: vsiInput=imageToBeProcessed,tifOutput=resultName} 
+    call convert {input: vsiInput=imageToBeProcessed} 
     File convert_out = convert.out
   }#do standard process  
   File? convert_out_maybe = convert_out
-  call quip_lymphocyte_segmentation {input: imageInput=convert_out_maybe,originalInput=imageToBeProcessed,result=resultName,BORBcompatible=BORBcompatible}
+  call quip_lymphocyte_segmentation {input: imageInput=convert_out_maybe,originalInput=imageToBeProcessed,result=resultName,BORBcompatible=BORBcompatible,network=segmentNetwork}
   output {
      quip_lymphocyte_segmentation.out
   }

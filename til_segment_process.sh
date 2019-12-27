@@ -18,6 +18,10 @@ case $i in
     BORBcompatible="${i#*=}"
     shift
     ;;
+    -network=*)
+    network="${i#*=}"
+    shift
+    ;;
     *)
           # unknown option
     ;;
@@ -31,7 +35,10 @@ then
 else
      echo "imageInput=$imageInput from converter is empty, use originalInput=$originalInput"
      imageInput=${originalInput}
-fi  
+fi
+
+export USE_MODEL="${network}"
+echo "using:${USE_MODEL} for segmentation}"
 #define paths 
 data_dir="/root/quip_classification/u24_lymphocyte/data"
 svs_dir="${data_dir}/svs/"
