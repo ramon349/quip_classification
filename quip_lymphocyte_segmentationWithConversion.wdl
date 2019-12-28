@@ -59,7 +59,7 @@ task quip_lymphocyte_segmentation {
       File out="${result}.tar.gz"
     }
     runtime {
-      docker: "us.gcr.io/cloudypipelines-com/til_segmentation:1.3"
+      docker: "us.gcr.io/cloudypipelines-com/til_segmentation:1.4"
       bootDiskSizeGb: 70
       disks: "local-disk 70 SSD"
       memory:  "52 GB"
@@ -77,7 +77,7 @@ workflow wf_quip_lymphocyte_segmentation{
   File imageToBeProcessed
   String resultName 
   String? BORBcompatible
-  String segmentNetwork
+  String network 
   #Detect if input image is vsi or not 
   call vsi_detector {input: fileInput=imageToBeProcessed} 
   Boolean should_call_convert = vsi_detector.out 
@@ -86,7 +86,7 @@ workflow wf_quip_lymphocyte_segmentation{
     File convert_out = convert.out
   }#do standard process  
   File? convert_out_maybe = convert_out
-  call quip_lymphocyte_segmentation {input: imageInput=convert_out_maybe,originalInput=imageToBeProcessed,result=resultName,BORBcompatible=BORBcompatible,network=segmentNetwork}
+  call quip_lymphocyte_segmentation {input: imageInput=convert_out_maybe,originalInput=imageToBeProcessed,result=resultName,BORBcompatible=BORBcompatible,network=network}
   output {
      quip_lymphocyte_segmentation.out
   }
