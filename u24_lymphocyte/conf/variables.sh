@@ -6,20 +6,21 @@ DEFAULT_MPP=0.25
 CANCER_TYPE=quip
 MONGODB_HOST=osprey.bmi.stonybrook.edu
 MONGODB_PORT=27017
-if [ $USE_MODEL -eq "incep"]
-then 
+if [ "$USE_MODEL" == "incep" ];then 
   echo "model param set to inception"
-  HEATMAP_VERSION="inception"
+  HEATMAP_VERSION_NAME="lym_inception-mix"
+  BINARY_HEATMAP_VERSION_NAME="lym_inception-mix_binary"
 else 
-  if [$USE_MODEL -eq "vgg"]
-    then 
+  if [ "$USE_MODEL" == "vgg" ];then 
     echo "model param set to vgg" 
-    HEATMAP_VERSION="vgg"
+    HEATMAP_VERSION_NAME="lym_vgg-mix"
+    BINARY_HEATMAP_VERSION_NAME="lym_vgg-mix_binary"
   else 
     echo " USE MODEL MUST BE  incep or vgg "
     exit -1 
   fi 
 fi 
+
 if [[ -n $HEATMAP_VERSION_NAME ]]; then
 	HEATMAP_VERSION=$HEATMAP_VERSION_NAME ;
 else
@@ -33,6 +34,8 @@ fi
 if [[ ! -n $LYM_PREDICTION_BATCH_SIZE ]]; then
    LYM_PREDICTION_BATCH_SIZE=96;
 fi
+echo "HEATMAP_VERSION: ${HEATMAP_VERSION}"
+echo "BINARY_HEATMAP_VERSION:${BINARY_HEATMAP_VERSION}"
 # Base directory
 BASE_DIR=/root/quip_classification/u24_lymphocyte
 OUT_DIR=${BASE_DIR}/data/output
@@ -84,6 +87,7 @@ if [[ -n $LYM_PREDICTION_BATCH_SIZE ]]; then
 else
   LYM_NECRO_CNN_MODEL_PATH=${BASE_DIR}/prediction/NNFramework_TF_models/config_vgg-mix_test_ext.ini ;
 fi
+echo "LYM_NECRO_CNN_MODEL_PATH: ${LYM_NECRO_CNN_MODEL_PATH}" 
 NEC_CNN_TRAINING_DATA=${BASE_DIR}/data/training_data_cnn
 NEC_CNN_TRAINING_DEVICE=gpu0
 NEC_CNN_PRED_DEVICE=gpu0
