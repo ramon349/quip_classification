@@ -60,7 +60,7 @@ task quip_lymphocyte_segmentation {
       File out="${result}.tar.gz"
     }
     runtime {
-      docker: "us.gcr.io/cloudypipelines-com/til_segmentation:1.4"
+      docker: "us.gcr.io/cloudypipelines-com/til_segmentation:1.5"
       bootDiskSizeGb: 70
       disks: "local-disk 70 SSD"
       memory:  "52 GB"
