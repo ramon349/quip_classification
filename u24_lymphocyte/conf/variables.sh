@@ -6,12 +6,14 @@ DEFAULT_MPP=0.25
 CANCER_TYPE=quip
 MONGODB_HOST=osprey.bmi.stonybrook.edu
 MONGODB_PORT=27017
-if [ "$USE_MODEL" == "incep" ];then 
+if [ "$USE_MODEL" == "incep" ]
+then 
   echo "model param set to inception"
   HEATMAP_VERSION_NAME="lym_inception-mix"
   BINARY_HEATMAP_VERSION_NAME="lym_inception-mix_binary"
 else 
-  if [ "$USE_MODEL" == "vgg" ];then 
+  if [ "$USE_MODEL" == "vgg" ]
+  then 
     echo "model param set to vgg" 
     HEATMAP_VERSION_NAME="lym_vgg-mix"
     BINARY_HEATMAP_VERSION_NAME="lym_vgg-mix_binary"
