@@ -18,12 +18,11 @@ task vsi_detector {
 task convert {
   File vsiInput
   String pattern = "\\.+\\w+"
-  String replacement = ".tiff"
+  String replacement = ".tif"
   String tiffName = sub(basename(vsiInput),pattern,replacement)
   command {
     echo "$(date): Task: convert started"
-
-    echo "File name to be used ${tiffName}
+    echo "File name to be used ${tiffName}" 
     cd /root
     time ./converter_process.sh ${vsiInput} ${tiffName}
     echo "$(date): Task: convert finished"
@@ -45,9 +44,11 @@ task convert {
 task quip_lymphocyte_segmentation {
   File? imageInput  
   File originalInput
-  String result 
   String? BORBcompatible
   String network
+  String pattern = "\\.+\\w+"
+  String replacement = "_segmentation"
+  String result = sub(basename(originalInput),pattern,replacement)
   command {
       echo "$(date): Till Segment has begun "
       cd /root/quip_classification 
@@ -75,7 +76,6 @@ task quip_lymphocyte_segmentation {
 
 workflow wf_quip_lymphocyte_segmentation{ 
   File imageToBeProcessed
-  String resultName 
   String? BORBcompatible
   String network 
   #Detect if input image is vsi or not 
@@ -86,7 +86,7 @@ workflow wf_quip_lymphocyte_segmentation{
     File convert_out = convert.out
   }#do standard process  
   File? convert_out_maybe = convert_out
-  call quip_lymphocyte_segmentation {input: imageInput=convert_out_maybe,originalInput=imageToBeProcessed,result=resultName,BORBcompatible=BORBcompatible,network=network}
+  call quip_lymphocyte_segmentation {input: imageInput=convert_out_maybe,originalInput=imageToBeProcessed,BORBcompatible=BORBcompatible,network=network}
   output {
      quip_lymphocyte_segmentation.out
   }
